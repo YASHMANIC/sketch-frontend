@@ -5,7 +5,7 @@ function App() {
   const [file, setFile] = useState<File | null>(null);
   const [imageURL, setImageURL] = useState<string | null>(null);
   const [message, setMessage] = useState("");
-  const [loading,setLoading] = useState(false)
+  const [loading,setLoading] = useState(false);
   useEffect(() => {
     setImageURL(null);
     setMessage("")
@@ -20,7 +20,7 @@ function App() {
     const formData = new FormData();
     formData.append("file", file);
     try {
-      const response = await fetch("http://localhost:8000/process-image", {
+      const response = await fetch("https://sketch-backend-7iey.onrender.com/process-image", {
         method: "POST",
         body: formData,
       });
@@ -96,7 +96,6 @@ function App() {
           }}
         />
       </div>
-
       <div>
         <button
           type="button"
