@@ -3,11 +3,9 @@ import { useState,useEffect } from "react";
 function App() {
   const [fileSize, setFileSize] = useState(0);
   const [file, setFile] = useState<File | null>(null);
-  const [imageURL, setImageURL] = useState<string | null>(null);
   const [message, setMessage] = useState("");
   const [loading,setLoading] = useState(false);
   useEffect(() => {
-    setImageURL(null);
     setMessage("")
   },[file])
   const onClick = async () => {
@@ -27,7 +25,6 @@ function App() {
       if (!response.ok) {
         const errorData = await response.json();
         setMessage(errorData.error || "Upload failed.");
-        setImageURL(null);
         setLoading(false);
         return;
       }
@@ -35,7 +32,6 @@ function App() {
       // Read image blob and convert to URL
       const blob = await response.blob();
       const imageUrl = URL.createObjectURL(blob);
-      setImageURL(imageUrl);
       setMessage("Sketch generated successfully!");
 
       // Open image in new tab with download button
@@ -62,7 +58,6 @@ function App() {
       }
     } catch (err) {
       setMessage("Upload failed.");
-      setImageURL(null);
     }
     setLoading(false);
   }
